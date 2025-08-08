@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}EcoNote - Sustainable Shopping{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 mb-4">Welcome to EcoNote</h1>
+        <p class="lead mb-4">Discover eco-friendly products that make a difference</p>
+        <a href="{{ url_for('shop.products') }}" class="btn btn-success btn-lg">Shop Now</a>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="mb-5">
+    <h2 class="text-center mb-4">Featured Products</h2>
+    <div class="product-grid">
+        {% for product in featured_products %}
+        <div class="card product-card">
+            <img src="{{ product.image or url_for('static', filename='img/product-placeholder.png') }}" 
+                 class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">{{ product.description[:100] }}...</p>
+                <div class="mt-auto">
+                    <p class="h5 mb-3">${{ "%.2f"|format(product.price) }}</p>
+                    <a href="{{ url_for('shop.add_to_cart', product_id=product.id) }}" 
+                       class="btn btn-success w-100">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="mb-5">
+    <h2 class="text-center mb-4">Shop by Category</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Eco-Friendly</h5>
+                    <p class="card-text">Discover products that help preserve our planet.</p>
+                    <a href="#" class="btn btn-outline-success">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-recycle fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Sustainable</h5>
+                    <p class="card-text">Shop sustainable products for a better tomorrow.</p>
+                    <a href="#" class="btn btn-outline-success">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-star fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">New Arrivals</h5>
+                    <p class="card-text">Check out our latest eco-friendly products.</p>
+                    <a href="#" class="btn btn-outline-success">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="bg-light py-5 text-center">
+    <div class="container">
+        <h2 class="mb-4">Stay Updated</h2>
+        <p class="mb-4">Subscribe to our newsletter for exclusive offers and eco-friendly tips.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form class="mb-3">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <button class="btn btn-success" type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

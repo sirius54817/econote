@@ -1,0 +1,290 @@
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin-top: 70px;
+}
+
+/* Dashboard Navigation Bar */
+.dashboard-navbar {
+  background: #232f3e; /* Dark blue-gray similar to Amazon */
+  padding: 0.5rem 1rem;
+}
+.dashboard-navbar .navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.dashboard-navbar .form-control {
+  border-radius: 0;
+  height: 40px;
+}
+.dashboard-navbar .btn-outline-light {
+  border-radius: 0;
+  height: 40px;
+}
+.dashboard-navbar .nav-link {
+  font-size: 0.9rem;
+}
+.dashboard-navbar .dropdown-menu {
+  min-width: 200px;
+  font-size: 0.9rem;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  padding: 20px 0;
+  margin-top: 80px;
+}
+
+/* Footer */
+.footer {
+  background-color: #131921;
+  color: #fff;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  background: url("../img/hero-bg.jpg") no-repeat center center/cover;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 174, 96, 0.7);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+/* How It Works Section */
+.how-it-works .icon-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.how-it-works .icon-card:hover {
+  transform: translateY(-5px);
+}
+.how-it-works .icon {
+  width: 80px;
+  height: 80px;
+}
+
+/* Featured Products */
+.featured-products h2 {
+  font-weight: 700;
+  color: #27ae60;
+}
+.product-card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.product-card .price {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #27ae60;
+}
+
+/* Authentication Pages */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+.auth-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Forms */
+.form-control {
+  border-radius: 4px;
+}
+.btn-success {
+  background-color: #27ae60;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #219150;
+}
+
+/* Checkout Form */
+.checkout-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Subscription Plans */
+.subscription-plans .plan-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.subscription-plans .plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.subscription-plans .plan-card .card-header {
+  background-color: #27ae60;
+  color: #fff;
+  font-weight: 600;
+}
+.subscription-dashboard li {
+  font-size: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+  .dashboard-navbar .navbar-brand img {
+    height: 30px;
+  }
+}
+
+
+
+
+
+
+/* Global Styles */
+:root {
+  --primary-color: #2ecc71;
+  --secondary-color: #27ae60;
+  --accent-color: #e74c3c;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Navbar Customization */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Card Customization */
+.card {
+  transition: transform 0.2s;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Buttons */
+.btn-success {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-success:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('../img/hero-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 0;
+  margin-bottom: 2rem;
+}
+
+/* Cart Badge */
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+/* Subscription Plans */
+.plan-card {
+  border: 2px solid #eee;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.plan-card.featured {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid #eee;
+}
+
+.social-links a {
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.social-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+      padding: 4rem 0;
+  }
+  
+  .plan-card.featured {
+      transform: none;
+  }
+}

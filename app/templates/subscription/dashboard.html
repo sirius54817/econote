@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Current Plan</h3>
+                {% if active_subscription %}
+                    <h4 class="text-success mb-3">{{ active_subscription.plan }}</h4>
+                    <p class="mb-2">Status: {{ active_subscription.status }}</p>
+                    <p class="mb-3">Valid until: {{ active_subscription.end_date.strftime('%B %d, %Y') }}</p>
+                    <a href="{{ url_for('subscription.plans') }}" class="btn btn-outline-success">Change Plan</a>
+                    <form method="POST" action="{{ url_for('subscription.cancel_subscription') }}" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Cancel Subscription</button>
+                    </form>
+                {% else %}
+                    <p class="mb-3">No active subscription</p>
+                    <a href="{{ url_for('subscription.plans') }}" class="btn btn-success">Subscribe Now</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Benefits</h3>
+                <ul class="list-unstyled">
+                    {% if active_subscription %}
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Free shipping</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Additional benefits</li>
+                    {% else %}
+                        <li class="text-muted">Subscribe to access benefits</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Subscription History</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subscription in subscriptions %}
+                            <tr>
+                                <td>{{ subscription.plan }}</td>
+                                <td>{{ subscription.start_date.strftime('%B %d, %Y') }}</td>
+                                <td>{{ subscription.end_date.strftime('%B %d, %Y') }}</td>
+                                <td>{{ subscription.status }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% if not subscriptions %}
+                <p class="text-center text-muted my-4">No subscription history available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3 class="card-title">Billing Information</h3>
+                {% if user.billing_info %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-2"><strong>Payment Method:</strong></p>
+                            <p class="mb-3">
+                                <i class="fas fa-credit-card me-2"></i>
+                                •••• •••• •••• {{ user.billing_info.last4 }}
+                                <span class="ms-2">Expires {{ user.billing_info.exp_month }}/{{ user.billing_info.exp_year }}</span>
+                            </p>
+                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#updatePaymentModal">
+                                Update Payment Method
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-2"><strong>Next Billing Date:</strong></p>
+                            <p class="mb-3">{{ active_subscription.end_date.strftime('%B %d, %Y') if active_subscription else 'N/A' }}</p>
+                            <p class="mb-2"><strong>Amount:</strong></p>
+                            <p>{{ 'Active Subscription' if active_subscription else 'No Active Subscription' }}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-center text-muted my-4">No billing information available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Method Modal -->
+<div class="modal fade" id="updatePaymentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Payment Method</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="payment-form" method="POST" action="{{ url_for('subscription.update_payment') }}">
+                    <div class="mb-3">
+                        <label for="card-number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card-number" name="card_number" required>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="expiry" class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/YY" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Update Payment Method</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
